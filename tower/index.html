@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+
+      <a-cylinder position="0 0 0" radius="5" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#FF0"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 45 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#F00"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 90 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#FF0"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 135 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#F0F"></a-cylinder>
+
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 180 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#0F0"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 225 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#0FF"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 270 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="#00F"></a-cylinder>
+
+      <a-cylinder position="0 0 0" radius="5" rotation= "0 315 0" height="10" theta-start="0" theta-length="45" side="double" open-ended="true" color="rgb(255,0,0)"></a-cylinder>
+    </a-scene>
+    <script type="text/javascript">
+      const init  = () => {
+        $elements = document.querySelectorAll('a-cylinder');
+        $elements.forEach(element=>{
+          const red = (Math.floor(Math.random()*155+100));
+          const green = (Math.floor(Math.random()*155+100));
+          const blue = (Math.floor(Math.random()*155+100));
+          element.setAttribute('color', `rgb(${red}, ${green} ,${blue})`);
+        })
+        //window.requestAnimationFrame(init);
+      }
+      init();
+    </script>
+  </body>
+</html>

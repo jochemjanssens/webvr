@@ -6,29 +6,30 @@
     <audio class="audio" preload="auto" controls src="./assets/audio/talk.mp3"></audio>
 
     <a-scene>
-      <a-box position="0 2 -3" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
+      <!--<a-box position="0 2 -3" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="2.1 2 -2.1" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="0 2 3" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="2.1 2 2.1" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="3 2 0" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="-2.1 2 2.1" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
       <a-box position="-3 2 0" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
-      <a-box position="-2.1 2 -2.1" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
+      <a-box position="-2.1 2 -2.1" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>-->
       <a-plane rotation="-90 0 0" width="30" height="30" color="#222"></a-plane>
 
     </a-scene>
     <script type="text/javascript">
-      const xPos = [0, 2.1, 0, 2.1, 3, -2.1, -3, -2.1];
-      const zPos = [-3, -2.1, 3, 2.1, 0, 2.1, 0, -2.1];
-
       let analyzer;
-      const elements = 7; //1024 zero based
+      const elements = 255; //1024 zero based
+      const angle = 2*Math.PI / (elements + 1)
+      let size = 0.1;
+
       let audio;
 
       let max = 255;
 
       const init  = () => {
         setupEquilizer();
+        setupBoxes();
         show();
       }
 
@@ -42,6 +43,20 @@
         sourceNode.connect(audioCtx.destination);
       };
 
+      const setupBoxes = () => {
+
+        const scene = document.querySelector('a-scene');
+        for (let i = 0; i <= elements; i++) {
+          const box = document.createElement('a-box');
+          box.setAttribute('color', '#4CC3D9');
+          box.setAttribute('height', '2');
+          box.setAttribute('width', size);
+          box.setAttribute('depth', size);
+          box.setAttribute('position', `${3 * Math.cos(angle*i)}, 2, ${3 * Math.sin(angle*i)}`);
+          scene.appendChild(box);
+        }
+      }
+
       const show = () => {
         const data = new Uint8Array(analyzer.frequencyBinCount);
         analyzer.getByteFrequencyData(data);
@@ -54,10 +69,9 @@
             console.log(max);
           }
           const height = (data[counter]/max*4);
-          //const height = 4;
           element.setAttribute('height', height);
-          element.setAttribute('color', `rgb(${data[counter]}, ${data[counter]}, 255)`);
-          element.setAttribute('position', `${xPos[counter]}, ${height/2}, ${zPos[counter]}`);
+          element.setAttribute('color', `rgb(${data[counter]}, ${data[counter]}, ${counter})`);
+          element.setAttribute('position', `${3 * Math.cos(angle*counter)}, ${height/2}, ${3 * Math.sin(angle*counter)}`);
         });
         window.requestAnimationFrame(show);
       }

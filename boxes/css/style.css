@@ -1,3 +1,7 @@
-.audio{
-  position: absolute;
+.header {
+  background-color: grey;
+  text-align: center;
+  font-family: 'Helvetica neue', Helvetica, Arial, sans-serif;
+  position: fixed;
+  z-index: 3;
 }

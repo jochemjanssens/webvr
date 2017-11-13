@@ -1,10 +1,15 @@
 <html>
   <head>
+    <title>VR - Experiment</title>
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <audio class="audio" preload="auto" controls src="./assets/audio/talk.mp3"></audio>
+
+    <header class="header">
+      <audio class="audio" preload="auto" controls src="./assets/audio/talk.mp3"></audio>
+      <p><a href="https://github.com/jochemjanssens/webvr">Github</a> - <a href="https://www.janssensjochem.be">Other projects</a></p>
+    </header>
 
     <a-scene>
       <!--<a-box position="0 2 -3" rotation="0 45 0" height="2" color="#4CC3D9"></a-box>
@@ -18,6 +23,7 @@
       <a-plane rotation="-90 0 0" width="30" height="30" color="#222"></a-plane>
 
     </a-scene>
+
     <script type="text/javascript">
       let analyzer;
       const elements = 255; //1024 zero based
